@@ -4,6 +4,7 @@ use anyhow::Result;
 use axum::{routing::get, Router};
 use tower::ServiceBuilder;
 use tower_http::{
+    cors::CorsLayer,
     trace::{DefaultMakeSpan, DefaultOnRequest, DefaultOnResponse, TraceLayer},
     LatencyUnit,
 };
@@ -23,7 +24,9 @@ impl ServerConfig {
 }
 
 fn new_router() -> Router {
-    Router::new().route("/", get(get_youtube_channel_feed))
+    Router::new()
+        .route("/", get(get_youtube_channel_feed))
+        .layer(CorsLayer::permissive())
 }
 
 pub async fn start_server(cfg: ServerConfig) -> Result<()> {
