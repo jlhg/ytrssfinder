@@ -24,8 +24,8 @@ pub async fn get_youtube_channel_feed(q: Query<Param>) -> (StatusCode, Json<Valu
                 }
                 None => render_bad_request("Channel source can't be resolved."),
             },
-            Err(_) => render_bad_request("Failed to get response body."),
+            Err(_) => render_bad_request("Failed to get the response body."),
         },
-        Err(_) => render_bad_request("Failed to send a request to YouTube."),
+        Err(_) => render_bad_request("Invalid channel URL."),
     }
 }
