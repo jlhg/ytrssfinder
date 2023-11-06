@@ -13,7 +13,7 @@ pub fn parse_args() -> Command {
             Arg::new("bind")
                 .short('b')
                 .alias("host")
-                .default_value("127.0.0.1")
+                .default_value("0.0.0.0")
                 .help("The IP address where the server is hosted."),
         )
         .arg(
