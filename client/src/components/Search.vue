@@ -36,6 +36,9 @@
           break
         }
       })
+      .catch(function(e) {
+        searchErrorMsg.value = e.toString()
+      })
   }
 </script>
 
