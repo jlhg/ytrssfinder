@@ -3,7 +3,7 @@ use axum::http::StatusCode;
 use regex::Regex;
 use serde::Deserialize;
 use serde_json::{json, Value};
-use tracing::error;
+use tracing::{error, warn};
 
 use crate::web::object::*;
 
@@ -23,16 +23,28 @@ pub async fn get_youtube_channel_feed(q: Query<Param>) -> (StatusCode, Json<Valu
                     let feed_url = caps.get(1).unwrap().as_str();
                     render_data(StatusCode::OK, json!({"feed_url": feed_url}))
                 }
-                None => render_bad_request("Channel source can't be resolved."),
+                None => {
+                    warn!(
+                        r#"channel_url={} message="Channel source can't be resolved.""#,
+                        q.channel_url
+                    );
+                    render_bad_request("Channel source can't be resolved.")
+                }
             },
             Err(e) => {
-                error!("{}", e);
+                warn!(
+                    r#"channel_url={}, message="Failed to get the response body" error="{}""#,
+                    q.channel_url, e
+                );
                 render_bad_request("Failed to get the response body.")
-            },
+            }
         },
         Err(e) => {
-            error!("{}", e);
+            warn!(
+                r#"channel_url={}, message="Invalid channel URL." error="{}" "#,
+                q.channel_url, e
+            );
             render_bad_request("Invalid channel URL.")
-        },
+        }
     }
 }
