@@ -12,7 +12,7 @@ pub struct Param {
 }
 
 pub async fn get_youtube_channel_feed(q: Query<Param>) -> (StatusCode, Json<Value>) {
-    let re = Regex::new(r#"href="(https://www\.youtube\.com/feeds/videos\.xml\?channel_id=\w+?)""#)
+    let re = Regex::new(r#"href="(https://www\.youtube\.com/feeds/videos\.xml\?channel_id=.+?)""#)
         .unwrap();
 
     match reqwest::get(&q.channel_url).await {
