@@ -42,7 +42,7 @@
 <template>
   <div class="q-pa-md">
     <div class="q-gutter-md">
-      <div class="row justify-center">
+      <div class="row justify-center text-center">
         <div class="col-md-6 col-xs-12">
           <h4>YouTube RSS Finder</h4>
         </div>
