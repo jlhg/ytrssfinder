@@ -60,7 +60,7 @@
             clearable
             clear-icon="fa-solid fa-xmark"
             no-error-icon
-            placeholder="Paste the YouTube channel URL"
+            placeholder="Paste the YouTube channel URL. e.g. https://www.youtube.com/user/YouTube/channels"
             v-on:blur="getFeedUrl"
             @keyup.enter="getFeedUrl"
             :error-message="searchErrorMsg"
