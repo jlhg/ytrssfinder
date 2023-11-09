@@ -1,7 +1,7 @@
 FROM rust:1.73.0 as build
 WORKDIR /app
 COPY ./server /app
-RUN cargo install --path .
+RUN cargo install --locked --path .
 
 FROM debian:bookworm-slim
 WORKDIR /app
